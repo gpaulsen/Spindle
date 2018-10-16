@@ -32,9 +32,10 @@ static signed int binding_offset;
 static void *dl_runtime_profile_ptr;
 static void *dl_runtime_resolve_ptr;
 
+/* GOT_resolve_offset used to be 16 for x86 and ppc64le, unused in 0.11 */
 #define GOT_resolve_offset 0
 
-#if defined(arch_x86_64)
+#if defined(arch_x86_64) || defined(arch_ppc64le)
 typedef Elf64_Addr funcptr_t;
 #define ASSIGN_FPTR(TO, FROM) *((Elf64_Addr *) TO) = (Elf64_Addr) FROM
 #elif defined(arch_ppc64) || defined(arch_ppc64le)
